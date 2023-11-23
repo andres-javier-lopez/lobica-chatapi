@@ -16,7 +16,16 @@ def get_response(prompt: str) -> str:
         'role': 'user',
         'content': prompt
     })
-    return get_completion_from_messages(messages)
+    response = get_completion_from_messages(messages)
+    messages.append({
+        'role': 'assistant',
+        'content': response,
+    })
+    return response
+
+
+def get_messages() -> list[dict[str, str]]:
+    return messages
 
 
 def clear_messages():
