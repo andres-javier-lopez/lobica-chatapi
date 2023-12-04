@@ -1,18 +1,7 @@
-import chatapi.ai as ai
+from langserve import add_routes
 
-from .app import app
-from .schemas import MessagePayload, MessagesResult
-
-
-@app.get("/messages")
-async def get_messsages() -> MessagesResult:
-    messages = ai.get_messages()
-
-    return MessagesResult(messages=messages)
+from chatapi.ai.assistant import chain
+from chatapi.api.app import app
 
 
-@app.post("/messages")
-async def send_message(message: MessagePayload) -> MessagesResult:
-    ai.get_response(message.content)
-    messages = ai.get_messages()
-    return MessagesResult(messages=messages)
+add_routes(app, chain, path="/assistant")
