@@ -1,4 +1,5 @@
-from langchain.prompts.chat import ChatPromptTemplate
+from langchain.prompts.chat import ChatPromptTemplate, MessagesPlaceholder
+
 
 from chatapi.ai.client import chat_model
 
@@ -9,6 +10,7 @@ human_template = "{text}"
 
 chat_prompt = ChatPromptTemplate.from_messages([
     ("system", template),
+    MessagesPlaceholder(variable_name="history"),
     ("human", human_template)
 ])
 
