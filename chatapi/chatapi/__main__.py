@@ -1,5 +1,3 @@
 import uvicorn
 
-from chatapi.api.app import app
-
-uvicorn.run(app, host="localhost", port=8000)
+uvicorn.run("chatapi.api.app:app", host="localhost", port=8000, reload=True)
